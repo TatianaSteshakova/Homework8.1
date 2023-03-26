@@ -7,7 +7,7 @@ class Person {
     private:
         string name;
         int age;
-        char gender;
+        string gender;
         double weight;
     public:
         Person() {
@@ -16,7 +16,7 @@ class Person {
             gender = ' ';
             weight = 0;
         }
-        Person(string n, int a, char g, double w) {
+        Person(string n, int a, string g, double w) {
             name = n;
             age = a;
             gender = g;
@@ -41,7 +41,7 @@ class Person {
             return weight;
         }
 
-        char getGender() const {
+        string getGender() const {
             return gender;
         }
 };
@@ -55,7 +55,7 @@ class Student : public Person {
             yearOfStudy = 1;
         }
 
-        Student(string n, int a, char g, double w, int y) : Person(n, a, g, w) {
+        Student(string n, int a, string g, double w, int y) : Person(n, a, g, w) {
             if(yearOfStudy >= 1)
             yearOfStudy = y;
             else
@@ -84,7 +84,7 @@ public:
         passType = "";
     }
 
-    Teacher(string n, int a, char g, double w, string p) : Person(n, a, g, w) {
+    Teacher(string n, int a, string g, double w, string p) : Person(n, a, g, w) {
         passType = p;
     }
 
@@ -112,20 +112,22 @@ public:
 
 int main()
 {
-    setlocale(0, "Rus");
+    system("chcp 1251"); // Без этого не читаются нормально строки, setlocale не помогает
 
     string n;
-    char g;
+    string g;
     int y, w;
 
 
     cout << "Введите имя, возраст, пол и вес: " << endl;
     cin >> n >> y >> g >> w;
+    cin.ignore();
 
     Person p(n, y, g, w);
 
     string who;
     cout << "Кого вы хотите добавить: " << endl;
+    getline(cin, who);
     if (who == "Студент")
     {
         int ys;
